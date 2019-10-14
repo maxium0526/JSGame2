@@ -157,21 +157,11 @@ class JSGame{
 			console.log('The game is in online mode, please specify the url in config.server.url.');
 		}
 
-		for(let players of this.objects.players){
-			players.JSGame = this;
-		}
-		for(let fields of this.objects.fields){
-			fields.JSGame = this;
-		}
-
+		this.initPlayers();
+		this.initFields();
 		this.initMapItems();
-	
-		for(let movableItems of this.objects.movableItems){
-			movableItems.JSGame = this;
-		}
-		for(let networkPlayers of this.objects.networkPlayers){
-			networkPlayers.JSGame = this;
-		}
+		this.initMovableItems();
+		this.initNetworkPlayers();
 
 		//reset the timer
 		if(this.mainTimer!=null){
