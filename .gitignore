@@ -2,3 +2,4 @@ server/node_modules
 
 front-end/img
 *.html
+server/map.json

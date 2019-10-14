@@ -100,7 +100,7 @@ class JSGame{
 
 			this.server.socket.on("addMapItems",(mapItems)=>{
 				for(let mapItem of mapItems){
-					_this.objects.mapItems.push(MapItemFactory.get(mapItem.name, mapItem));
+					_this.objects.mapItems.push(MapItemFactory.get(mapItem.type, mapItem));
 				}
 				_this.initMapItems();
 			});

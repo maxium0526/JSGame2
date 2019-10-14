@@ -1,7 +1,16 @@
 var io = require("socket.io")();
-var map = require("./map.js");
+var mapItems = require("./map.json");
 
-var mapItems = map.convertMapItems(0,0,32,32);
+var mid = 0;
+function getMid(){
+	return ++mid;
+}
+
+for(let mapItem of mapItems){
+	mapItem.mid = getMid();
+}
+
+// var mapItems = map.convertMapItems(0,0,32,32);
 
 var players = [];
 
