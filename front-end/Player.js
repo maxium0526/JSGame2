@@ -8,6 +8,7 @@ class Player extends MovableItem{
 		this.name = config.name;
 		this.dead = false;
 		this.sid = config.sid;
+		this.isNameVisible = true;
 	}
 	
 	initState(){
@@ -15,6 +16,7 @@ class Player extends MovableItem{
 		this.touched.down = false;
 		this.touched.left = false;
 		this.touched.right = false;
+		this.isNameVisible = true;
 	}
 	
 	doTriggerEvent(input, frameTime, scale){
@@ -50,21 +52,24 @@ class Player extends MovableItem{
 	draw(gc){
 		if(this.image){
 			super.draw(gc);
-			gc.font = "12px sans-serif";
-			gc.fillText(this.name, this.x + this.width/2 - gc.measureText(this.name).width/2, this.y-16);
-			return;
+			
+
+		} else {
+			gc.fillStyle = this.color;
+			// gc.fillRect(this.x,this.y,this.width,this.height);
+			gc.fillRect(this.x, this.y, Math.min(this.width,this.height), Math.min(this.width,this.height));
+			gc.fillRect(this.x, this.y+this.height * 6/10, this.width, this.height * 1/10);
+			gc.fillRect(this.x + this.width * 4/10,this.y, this.width * 2/10, this.height * 8.5/10);
+			gc.fillRect(this.x, this.y+ this.height * 8/10, this.width, this.height * 1/10);
+			gc.fillRect(this.x, this.y + this.height * 8/10, this.width * 2/10, this.height * 2/10);
+			gc.fillRect(this.x + this.width * 8/10, this.y + this.height * 8/10, this.width * 2/10, this.height * 2/10);
 		}
 
-		gc.fillStyle = this.color;
-		// gc.fillRect(this.x,this.y,this.width,this.height);
-		gc.fillRect(this.x, this.y, Math.min(this.width,this.height), Math.min(this.width,this.height));
-		gc.fillRect(this.x, this.y+this.height * 6/10, this.width, this.height * 1/10);
-		gc.fillRect(this.x + this.width * 4/10,this.y, this.width * 2/10, this.height * 8.5/10);
-		gc.fillRect(this.x, this.y+ this.height * 8/10, this.width, this.height * 1/10);
-		gc.fillRect(this.x, this.y + this.height * 8/10, this.width * 2/10, this.height * 2/10);
-		gc.fillRect(this.x + this.width * 8/10, this.y + this.height * 8/10, this.width * 2/10, this.height * 2/10);
-		gc.font = "12px sans-serif";
-		gc.fillText(this.name, this.x + this.width/2 - gc.measureText(this.name).width/2, this.y-16);
+		if(this.isNameVisible){
+			gc.font = "12px sans-serif";
+			gc.fillText(this.name, this.x + this.width/2 - gc.measureText(this.name).width/2, this.y-16);
+		}
+		
 	}
 
 	static getRandomColor() {

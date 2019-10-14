@@ -101,6 +101,10 @@ class MapItemFactory{
 				config.color = "#CECECE"
 				config.image_src = "img/nontouchwall.png";
 				return new NonTouchWall(config);
+			case "Grass":
+				config.color = "#FF0000";
+				config.image_src = "img/grass.png";
+				return new Grass(config);
 			default: return null;
 		}
 	}
@@ -421,4 +425,14 @@ class NonTouchWall extends MapItem{
 	}
 }
 
-// export {MapItem, MapItemFactory, Bounce, StickyWall, SmoothWall, SuckWall, GravityWall, MediumWall, NonTouchWall};
+class Grass extends MapItem{
+	constructor(config){
+		super(config);
+	}
+
+	onTouch(item, type){
+		if(item.constructor.name=='Player'){
+			item.isNameVisible = false;
+		}
+	}
+}
