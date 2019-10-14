@@ -100,7 +100,7 @@ class JSGame{
 
 			this.server.socket.on("addMapItems",(mapItems)=>{
 				for(let mapItem of mapItems){
-					_this.objects.mapItems.push(MapItemFactory.get(mapItem.type, mapItem));
+					_this.objects.mapItems.push(MapItemFactory.get(mapItem.name, mapItem));
 				}
 				_this.initMapItems();
 			});
@@ -361,7 +361,7 @@ class JSGame{
 			let mapItemInfoList = JSON.parse(json);
 			let mapItems = [];
 			for(let mapItemInfo of mapItemInfoList){
-				mapItems.push(MapItemFactory.get(mapItemInfo.type, mapItemInfo))
+				mapItems.push(MapItemFactory.get(mapItemInfo.name, mapItemInfo))
 			}
 			this.objects.mapItems = this.objects.mapItems.concat(mapItems);
 		} else {
