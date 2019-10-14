@@ -37,7 +37,7 @@ class JSGame{
 				// })
 			],
 			movableItems: [],
-			networkPlayers: [],
+			onlinePlayers: [],
 		}
 		this.objects.allMovableItems = this.objects.players.concat(this.objects.movableItems);
 
@@ -106,7 +106,7 @@ class JSGame{
 			});
 			this.server.socket.on("getPlayers",(players)=>{
 				for(let player of players){
-					_this.updateNetworkPlayerPosition(player);
+					_this.updateOnlinePlayerPosition(player);
 				}
 			});
 			this.server.socket.on("receiveSid",(receivedSid)=>{
@@ -131,10 +131,10 @@ class JSGame{
 				},10);
 			});
 			this.server.socket.on("refreshPlayerPosition",(player)=>{
-				_this.updateNetworkPlayerPosition(player);
+				_this.updateOnlinePlayerPosition(player);
 			});
 			this.server.socket.on("removePlayer",(sid)=>{
-				_this.removeNetworkPlayer(sid);
+				_this.removeOnlinePlayer(sid);
 			});
 
 			//get items from server
@@ -161,7 +161,7 @@ class JSGame{
 		this.initFields();
 		this.initMapItems();
 		this.initMovableItems();
-		this.initNetworkPlayers();
+		this.initOnlinePlayers();
 
 		//reset the timer
 		if(this.mainTimer!=null){
@@ -196,8 +196,8 @@ class JSGame{
 				}
 			}
 			for(let i = 0; i<_this.objects.players.length; i++){
-				for(let j=0; j<_this.objects.networkPlayers.length; j++){
-					_this.objects.players[i].touch(_this.objects.networkPlayers[j]);
+				for(let j=0; j<_this.objects.onlinePlayers.length; j++){
+					_this.objects.players[i].touch(_this.objects.onlinePlayers[j]);
 				}
 			}	
 			for(let i = 0; i<_this.objects.allMovableItems.length-1; i++){
@@ -255,8 +255,8 @@ class JSGame{
 				_this.objects.fields[i].draw(ctx);
 			}
 
-			for(let i=0; i<_this.objects.networkPlayers.length;i++){
-				_this.objects.networkPlayers[i].draw(ctx);
+			for(let i=0; i<_this.objects.onlinePlayers.length;i++){
+				_this.objects.onlinePlayers[i].draw(ctx);
 			}
 			ctx.restore();
 		}
@@ -284,8 +284,8 @@ class JSGame{
 			for(let i = 0; i<_this.objects.fields.length;i++){
 				_this.objects.fields[i].draw(ctx);
 			}
-			for(let i=0; i<_this.objects.networkPlayers.length;i++){
-				_this.objects.networkPlayers[i].draw(ctx);
+			for(let i=0; i<_this.objects.onlinePlayers.length;i++){
+				_this.objects.onlinePlayers[i].draw(ctx);
 			}
 			ctx.restore();
 		}
@@ -307,8 +307,8 @@ class JSGame{
 			for(let i = 0; i<_this.objects.fields.length;i++){
 				_this.objects.fields[i].draw(ctx);
 			}
-			for(let i=0; i<_this.objects.networkPlayers.length;i++){
-				_this.objects.networkPlayers[i].draw(ctx);
+			for(let i=0; i<_this.objects.onlinePlayers.length;i++){
+				_this.objects.onlinePlayers[i].draw(ctx);
 			}
 		}
 
@@ -350,8 +350,8 @@ class JSGame{
 		}
 	}
 
-	initNetworkPlayers(){
-		for(let player of this.objects.networkPlayers){
+	initOnlinePlayers(){
+		for(let player of this.objects.onlinePlayers){
 			player.JSGame = this;
 		}
 	}
@@ -370,8 +370,8 @@ class JSGame{
 
 	}
 
-	updateNetworkPlayerPosition(p){
-		if(this.objects.networkPlayers.filter(player=>player.sid==p.sid).length==0){
+	updateOnlinePlayerPosition(p){
+		if(this.objects.onlinePlayers.filter(player=>player.sid==p.sid).length==0){
 			let newPlayer = new Player({
 				name: p.name,
 				x: p.x,
@@ -382,9 +382,9 @@ class JSGame{
 				image_src: p.image_src,
 				sid: p.sid,
 			});
-			this.objects.networkPlayers.push(newPlayer);
+			this.objects.onlinePlayers.push(newPlayer);
 		} else {
-			let player = this.objects.networkPlayers.filter(player=>player.sid==p.sid);
+			let player = this.objects.onlinePlayers.filter(player=>player.sid==p.sid);
 			if(player.length>0){
 				player = player[0];
 				player.x = p.x;
@@ -393,8 +393,8 @@ class JSGame{
 		}
 	}
 
-	removeNetworkPlayer(pSid){
-		this.objects.networkPlayers = this.objects.networkPlayers.filter(p=>p.sid!=pSid);
+	removeOnlinePlayer(pSid){
+		this.objects.onlinePlayers = this.objects.onlinePlayers.filter(p=>p.sid!=pSid);
 	}
 
 }
