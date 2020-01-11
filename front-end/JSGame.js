@@ -13,20 +13,22 @@ class JSGame{
 			socket: null,
 		}
 		this.objects = {
-			players: [new Player({
-				name: 'Max',
-				x: 31,
-				y: 0,
-				width: 25,
-				height: 50,
-				image_src: "img/player.png",
-				keySet: {"up":87,"left":65,"right":68,"down":83, "up2":256},
-				weight: 1,
-				fx: 0,
-				fy: 0,
-				ax: 0,
-				ay: 9.8,
-			})],
+			players: [
+				new Player({
+					name: 'Max',
+					x: 31,
+					y: 0,
+					width: 25,
+					height: 50,
+					image_src: "img/player.png",
+					keySet: {"up":87,"left":65,"right":68,"down":83, "up2":256},
+					weight: 1,
+					fx: 0,
+					fy: 0,
+					ax: 0,
+					ay: 9.8,
+				}),
+				],
 			fields: [],
 			mapItems: [
 				// new MapItem({
@@ -202,7 +204,7 @@ class JSGame{
 			}	
 			for(let i = 0; i<_this.objects.allMovableItems.length-1; i++){
 				for(let j = i+1; j<_this.objects.allMovableItems.length; j++){
-					Player.impact(_this.objects.allMovableItems[i],_this.allMovableItems[j]);
+					Player.impact(_this.objects.allMovableItems[i],_this.objects.allMovableItems[j]);
 				}
 			}	
 			for(let i = 0; i<_this.objects.movableItems.length; i++){
