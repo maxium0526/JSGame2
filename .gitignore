@@ -1,4 +1,4 @@
 server/node_modules
-
+*.html
 front-end/img
 server/map.json
