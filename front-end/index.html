@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+		<script type="text/javascript" src="socket.io.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/2.1.1/system.js"></script>
+		<script src="input.js"></script>
+		<!-- <script src="settings.js"></script> -->
+		<script src="Item.js"></script>
+		<script src="Player.js"></script>
+		<script src="Field.js"></script>
+		<script src="MapItem.js"></script>
+		<script src="MapRenderer.js"></script>
+		<!-- <script src="objects.js"></script> -->
+		<script src="JSGame.js"></script>
+	</head>
+	<body>
+		<canvas id="canvas" width="1800" height="900"></canvas>	
+		<!-- <script src="main.js"></script> -->
+		<script type="text/javascript">
+			var game = new JSGame(document.getElementById('canvas'),{
+				settings:{
+					tickTime: 0.005,
+					mode: 0,
+					camera: 1,
+				},
+				server: {
+						url: 'http://localhost:3000'
+					}
+			});
+			game.loadMap('[{"x":288,"y":768,"width":64,"height":32,"name":"Bounce","color":"#FFFF33"},{"x":448,"y":352,"width":32,"height":32,"name":"StickyWall","color":"#00FF00"},{"x":576,"y":416,"width":32,"height":32,"name":"StickyWall","color":"#00FF00"},{"x":672,"y":320,"width":32,"height":32,"name":"StickyWall","color":"#00FF00"},{"x":800,"y":416,"width":32,"height":32,"name":"StickyWall","color":"#00FF00"},{"x":928,"y":352,"width":32,"height":32,"name":"StickyWall","color":"#00FF00"},{"x":384,"y":608,"width":864,"height":32,"name":"MapItem","color":"#000000"},{"x":384,"y":288,"width":32,"height":320,"name":"GravityWall","color":"#888888"},{"x":352,"y":288,"width":32,"height":32,"name":"GravityWall","color":"#888888"},{"x":1120,"y":384,"width":128,"height":32,"name":"NonTouchWall","color":"#CECECE"},{"x":1248,"y":384,"width":32,"height":256,"name":"MapItem","color":"#000000"},{"x":1280,"y":384,"width":64,"height":96,"name":"SuckWall","color":"#1A005B"},{"x":1344,"y":192,"width":32,"height":608,"name":"MapItem","color":"#000000"},{"x":1248,"y":768,"width":96,"height":32,"name":"NonTouchWall","color":"#CECECE"},{"x":352,"y":320,"width":32,"height":320,"name":"MapItem","color":"#000000"},{"x":352,"y":768,"width":896,"height":32,"name":"SmoothWall","color":"#8EF9F6"},{"x":0,"y":768,"width":288,"height":32,"name":"MapItem","color":"#000000"},{"x":0,"y":0,"width":32,"height":768,"name":"MapItem","color":"#000000"},{"x":128,"y":736,"width":32,"height":32,"name":"Grass","color":"#000000"}]');
+			game.start();
+		</script>
+	</body>
+</html>
